@@ -14,6 +14,7 @@ import java.util.concurrent.TimeoutException;
 
 import static org.apache.commons.lang3.SystemUtils.IS_OS_MAC;
 import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+import org.zeroturnaround.exec.stream.slf4j.Slf4jStream;
 
 /**
  * Created by sepi on 31.08.16.
@@ -27,6 +28,8 @@ public class SystemUtils {
         try {
             return new ProcessExecutor()
                     .command(args)
+					.redirectOutput(Slf4jStream.of(getClass()).asInfo())
+					.redirectError(Slf4jStream.of(getClass()).asError())
                     .readOutput(true)
                     .execute()
                     .outputUTF8();
