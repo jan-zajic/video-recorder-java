@@ -19,6 +19,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by sergey on 18.06.16.
  */
+@Test(singleThreaded=true)
 public class TestNGRemoteListenerTest extends BaseTest {
 
   @BeforeClass
@@ -89,6 +90,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
   @Test
   @Video
   public void shouldBeDefaultFolderForVideo() {
+	System.clearProperty("video.folder");
     ITestResult result = prepareMock(testMethod);
     RemoteVideoListener listener = new RemoteVideoListener();
     listener.onTestStart(result);
@@ -106,7 +108,7 @@ public class TestNGRemoteListenerTest extends BaseTest {
     listener.onTestStart(result);
     listener.onTestFailure(result);
     File file = MonteRecorder.getLastRecording();
-    assertThat(file.getParentFile().getName(), equalTo("video"));
+    assertThat(file.getParentFile().getName(), equalTo("custom_folder"));
   }
 
   public static void startGrid(String hubPort, String nodePort) throws Exception {
