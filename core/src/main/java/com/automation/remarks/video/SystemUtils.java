@@ -28,8 +28,8 @@ public class SystemUtils {
         try {
             return new ProcessExecutor()
                     .command(args)
-					.redirectOutput(Slf4jStream.of(getClass()).asInfo())
-					.redirectError(Slf4jStream.of(getClass()).asError())
+					.redirectOutput(Slf4jStream.of(SystemUtils.class).asInfo())
+					.redirectError(Slf4jStream.of(SystemUtils.class).asError())
                     .readOutput(true)
                     .execute()
                     .outputUTF8();
