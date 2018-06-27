@@ -76,6 +76,7 @@ subprojects {
     }
 
     test {
+		systemProperty "ffmpeg.display", System.getProperty("ffmpeg.display")
         testLogging {
             events "passed", "skipped", "failed"
             exceptionFormat = 'full'
